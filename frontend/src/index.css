@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100;
+    margin: 0;
+    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+}

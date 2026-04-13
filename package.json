@@ -1,0 +1,13 @@
+{
+  "name": "sde-prep",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n FE,BE -c cyan,yellow \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "build": "npm run build --prefix frontend && npm run build --prefix backend",
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
