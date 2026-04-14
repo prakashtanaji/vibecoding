@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Moon, Sun, PanelLeft, Code2 } from 'lucide-react';
+import { Moon, Sun, PanelLeft } from 'lucide-react';
 import { api } from '../../api/client';
 import { useUIStore } from '../../stores/uiStore';
 
@@ -24,7 +24,7 @@ export function Header() {
           <PanelLeft size={16} />
         </button>
         <div className="flex items-center gap-2">
-          <Code2 size={18} className="text-brand-500" />
+          <img src="/logo.svg" alt="SDE Prep" className="w-7 h-7 rounded-lg shadow-sm" />
           <span className="font-bold text-slate-800 dark:text-slate-100 text-sm">SDE Prep</span>
         </div>
       </div>

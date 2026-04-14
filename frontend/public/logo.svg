@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e3a5f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#818cf8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="100" height="100" rx="22" ry="22" fill="url(#bg)"/>
+
+  <!-- Subtle grid dots (circuit feel) -->
+  <g fill="#334155" opacity="0.5">
+    <circle cx="18" cy="18" r="1.2"/><circle cx="34" cy="18" r="1.2"/>
+    <circle cx="66" cy="18" r="1.2"/><circle cx="82" cy="18" r="1.2"/>
+    <circle cx="18" cy="82" r="1.2"/><circle cx="34" cy="82" r="1.2"/>
+    <circle cx="66" cy="82" r="1.2"/><circle cx="82" cy="82" r="1.2"/>
+    <circle cx="18" cy="34" r="1.2"/><circle cx="82" cy="34" r="1.2"/>
+    <circle cx="18" cy="66" r="1.2"/><circle cx="82" cy="66" r="1.2"/>
+  </g>
+
+  <!-- Circuit trace lines -->
+  <g stroke="#1e40af" stroke-width="1" fill="none" opacity="0.4">
+    <polyline points="18,18 18,34"/>
+    <polyline points="82,18 82,34"/>
+    <polyline points="18,66 18,82"/>
+    <polyline points="82,66 82,82"/>
+  </g>
+
+  <!-- Main </> code brackets -->
+  <g filter="url(#glow)">
+    <polyline points="28,38 16,50 28,62"
+      fill="none" stroke="url(#accent)" stroke-width="5.5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="72,38 84,50 72,62"
+      fill="none" stroke="url(#accent)" stroke-width="5.5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="58" y1="33" x2="42" y2="67"
+      stroke="#e2e8f0" stroke-width="4.5"
+      stroke-linecap="round" opacity="0.9"/>
+  </g>
+
+  <!-- Star sparkle top-right -->
+  <g fill="#fbbf24" opacity="0.9" transform="translate(76,16)">
+    <polygon points="0,-5 1.2,-1.2 5,0 1.2,1.2 0,5 -1.2,1.2 -5,0 -1.2,-1.2" />
+  </g>
+
+  <!-- Dot accent bottom -->
+  <circle cx="50" cy="80" r="2.5" fill="url(#accent)" opacity="0.7"/>
+</svg>
