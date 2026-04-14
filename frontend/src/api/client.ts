@@ -16,6 +16,9 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export const api = {
   // Tracks
   getTracks: () => request<any[]>('/tracks'),
+  createTrack: (body: object) => request<any>('/tracks', { method: 'POST', body: JSON.stringify(body) }),
+  updateTrack: (id: number, body: object) => request<any>(`/tracks/${id}`, { method: 'PATCH', body: JSON.stringify(body) }),
+  deleteTrack: (id: number) => request<any>(`/tracks/${id}`, { method: 'DELETE' }),
 
   // Topics
   getTopic: (id: number) => request<any>(`/topics/${id}`),
