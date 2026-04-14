@@ -38,6 +38,43 @@ router.get('/topics/:id/resources', (req, res) => {
   res.json(resources);
 });
 
+// POST /api/tracks – create a new company track
+router.post('/tracks', (req, res) => {
+  const { name, type, company, icon } = req.body;
+  if (!name || !type || !company) {
+    return res.status(400).json({ error: 'name, type, and company are required' });
+  }
+  if (!['faang', 'mid', 'startup'].includes(type)) {
+    return res.status(400).json({ error: 'type must be faang, mid, or startup' });
+  }
+  const maxOrder = (db.prepare('SELECT MAX(sort_order) as m FROM tracks').get() as any)?.m ?? -1;
+  const result = db.prepare(`
+    INSERT INTO tracks (name, type, company, icon, sort_order) VALUES (?, ?, ?, ?, ?)
+  `).run(name, type, company, icon ?? '🏢', maxOrder + 1);
+  return res.status(201).json({ id: result.lastInsertRowid });
+});
+
+// DELETE /api/tracks/:id – delete a user-added track
+router.delete('/tracks/:id', (req, res) => {
+  const track = db.prepare('SELECT * FROM tracks WHERE id = ?').get(req.params.id) as any;
+  if (!track) return res.status(404).json({ error: 'Track not found' });
+  db.prepare('DELETE FROM tracks WHERE id = ?').run(req.params.id);
+  return res.json({ ok: true });
+});
+
+// PATCH /api/tracks/:id – update track name or icon
+router.patch('/tracks/:id', (req, res) => {
+  const { name, icon } = req.body;
+  const updates: string[] = [];
+  const values: any[] = [];
+  if (name) { updates.push('name = ?'); values.push(name); }
+  if (icon) { updates.push('icon = ?'); values.push(icon); }
+  if (!updates.length) return res.status(400).json({ error: 'Nothing to update' });
+  values.push(req.params.id);
+  db.prepare(`UPDATE tracks SET ${updates.join(', ')} WHERE id = ?`).run(...values);
+  return res.json({ ok: true });
+});
+
 // POST /api/topics – create a new topic
 router.post('/topics', (req, res) => {
   const { track_id, parent_id, name, description, estimated_hours } = req.body;
